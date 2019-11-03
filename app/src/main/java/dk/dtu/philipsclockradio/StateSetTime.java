@@ -40,5 +40,14 @@ public class StateSetTime extends StateAdapter {
     public void onClick_Preset(ContextClockradio context) {
         context.setState(new StateStandby(context.getTime()));
     }
-
+    @Override
+    public void onClick_Sleep(ContextClockradio context) {
+        super.onClick_Sleep(context);
+        context.setState(new StateSleep());
+    }
+    @Override
+    public void onLongClick_Power(ContextClockradio context) {
+        super.onLongClick_Power(context);
+        context.setState(new StateOnAM());
+    }
 }

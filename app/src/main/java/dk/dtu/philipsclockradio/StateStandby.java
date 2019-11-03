@@ -8,7 +8,6 @@ public class StateStandby extends StateAdapter {
     private Date mTime;
     private static Handler mHandler = new Handler();
     private ContextClockradio mContext;
-    MainUI mainUI = new MainUI();
 
     StateStandby(Date time){
         mTime = time;
@@ -68,5 +67,17 @@ public class StateStandby extends StateAdapter {
         super.onClick_Power(context);
         stopClock();
         context.setState(new StateOnFM(1));
+    }
+
+    @Override
+    public void onClick_Sleep(ContextClockradio context) {
+        super.onClick_Sleep(context);
+        context.setState(new StateSleep());
+
+    }
+    @Override
+    public void onLongClick_Power(ContextClockradio context) {
+        super.onLongClick_Power(context);
+        context.setState(new StateOnAM());
     }
 }

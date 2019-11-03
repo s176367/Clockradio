@@ -1,6 +1,7 @@
 package dk.dtu.philipsclockradio;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.graphics.Color.BLACK;
 
@@ -265,4 +267,10 @@ public class MainUI extends AppCompatActivity implements OnTouchListener {
 
     }
 
+    public void displayToastAM(Context view) {
+        Toast.makeText(MainUI.this, "Now in AM mode", Toast.LENGTH_SHORT).show();
+    }
+    public void displayToastFM(Context view) {
+        Toast.makeText(MainUI.this, "Now in FM mode", Toast.LENGTH_SHORT).show();
+    }
 }
