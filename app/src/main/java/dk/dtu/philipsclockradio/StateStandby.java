@@ -52,6 +52,12 @@ public class StateStandby extends StateAdapter {
     }
 
     @Override
+    public void onExitState(ContextClockradio context) {
+        super.onExitState(context);
+        context.ui.turnOffLED(3);
+    }
+
+    @Override
     public void onLongClick_Preset(ContextClockradio context) {
         stopClock();
         context.setState(new StateSetTime());
@@ -61,6 +67,6 @@ public class StateStandby extends StateAdapter {
     public void onClick_Power(ContextClockradio context)  {
         super.onClick_Power(context);
         stopClock();
-        context.setState(new StateOn(1));
+        context.setState(new StateOnFM(1));
     }
 }
