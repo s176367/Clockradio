@@ -13,6 +13,26 @@ public class StateOnAM extends StateAdapter {
     ArrayList<Integer> list = new ArrayList<>();
     int i;
 
+    public ArrayList<Integer> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Integer> list) {
+        this.list = list;
+    }
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+    StateOnAM(){
+
+    }
+
     @Override
     public void onEnterState(ContextClockradio context) {
         super.onEnterState(context);
@@ -33,8 +53,14 @@ public class StateOnAM extends StateAdapter {
     @Override
     public void onClick_Power(ContextClockradio context) {
         super.onClick_Power(context);
-        context.setState(new StateOnFM(1));
+        context.setState(new StateOnFM());
 
+    }
+
+    @Override
+    public void onLongClick_Power(ContextClockradio context) {
+        super.onLongClick_Power(context);
+        context.setState(new StateStandby(context.getTime()));
     }
 
     @Override
@@ -67,4 +93,8 @@ public class StateOnAM extends StateAdapter {
 
     }
 
+    @Override
+    public void onLongClick_Preset(ContextClockradio context) {
+        context.setState(new StatePresetAM());
+    }
 }

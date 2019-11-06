@@ -2,13 +2,8 @@ package dk.dtu.philipsclockradio;
 
 import android.content.Context;
 import android.os.Handler;
-import android.view.View;
 
-import com.google.common.primitives.Ints;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 public class StateOnFM extends StateAdapter {
@@ -16,9 +11,25 @@ public class StateOnFM extends StateAdapter {
     private static Handler mHandler = new Handler();
     private ContextClockradio mContext;
     Context view;
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
     int i;
 
 
+    public ArrayList<Integer> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Integer> list) {
+        this.list = list;
+    }
 
     //radio frequencies
     ArrayList<Integer> list = new ArrayList<>();
@@ -28,7 +39,7 @@ public class StateOnFM extends StateAdapter {
 
 
 
-    StateOnFM(int radiofz) {
+    StateOnFM() {
     }
 
 
@@ -76,12 +87,16 @@ public class StateOnFM extends StateAdapter {
     }
 
     @Override
-    public void onLongClick_Power(ContextClockradio context) {
+    public void onClick_Power(ContextClockradio context) {
         super.onLongClick_Power(context);
         context.setState(new StateOnAM());
     }
 
-    //TODO: Make this method save the current radio station for a preset.
+    @Override
+    public void onLongClick_Power(ContextClockradio context) {
+        super.onLongClick_Power(context);
+        context.setState(new StateStandby(context.getTime()));
+    }
 
     @Override
     public void onClick_Min(ContextClockradio context) {
@@ -103,5 +118,15 @@ public class StateOnFM extends StateAdapter {
 
         }
 
+    @Override
+    public void onLongClick_Preset(ContextClockradio context) {
+        context.setState(new StatePresetFM());
+
     }
+
+    @Override
+    public void onClick_Preset(ContextClockradio context) {
+
+    }
+}
 

@@ -24,7 +24,7 @@ public class StateSleep extends StateAdapter {
     @Override
     public void onClick_Power(ContextClockradio context)  {
         super.onClick_Power(context);
-        context.setState(new StateOnFM(1));
+        context.setState(new StateOnFM());
     }
     @Override
     public void onLongClick_Power(ContextClockradio context) {
