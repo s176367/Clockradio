@@ -4,7 +4,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.view.View;
 
+import com.google.common.primitives.Ints;
+
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -13,25 +16,40 @@ public class StateOnFM extends StateAdapter {
     private static Handler mHandler = new Handler();
     private ContextClockradio mContext;
     Context view;
+    int i;
+
 
 
     //radio frequencies
-    public int[] radiofz = {1,2,3,4,5,6,7,8,9,10};
+    ArrayList<Integer> list = new ArrayList<>();
+
+
     private State StateOn;
 
 
-    StateOnFM(int radiofz){}
 
+    StateOnFM(int radiofz) {
+    }
 
 
     @Override
     public void onEnterState(ContextClockradio context) {
         super.onEnterState(context);
         mContext = context;
+        list.add(0,10);
+        list.add(1,20);
+        list.add(2,30);
+        list.add(3, 40);
+        list.add(4,50);
         context.updateDisplayTime();
-        context.ui.setDisplayText(Arrays.toString(radiofz));
+        context.ui.setDisplayText(String.valueOf(list.get(i)));
         context.ui.turnOnLED(1);
-        
+
+
+
+
+
+
         context.ui.displayToastFM(view);
 
     }
@@ -50,10 +68,6 @@ public class StateOnFM extends StateAdapter {
 
     }
 
-    @Override
-    public void onClick_Hour(ContextClockradio context) {
-        super.onClick_Hour(context);
-    }
 
     @Override
     public void onClick_Sleep(ContextClockradio context) {
@@ -69,14 +83,25 @@ public class StateOnFM extends StateAdapter {
 
     //TODO: Make this method save the current radio station for a preset.
 
-    /**
-     * Saving channels could be done through sharedpreferences
-     * @param context
-     */
-
+    @Override
+    public void onClick_Min(ContextClockradio context) {
+            i++;
+            if(i>list.size()-1){
+                i=0;
+            }
+            context.ui.setDisplayText(String.valueOf(list.get(i)));
+        System.out.println(list.get(i));
+    }
 
     @Override
-    public void onLongClick_Preset(ContextClockradio context) {
-        super.onLongClick_Preset(context);
+    public void onClick_Hour(ContextClockradio context) {
+            i--;
+            if (i<0){
+                i = list.size()-1;
+            }
+            context.ui.setDisplayText(String.valueOf(list.get(i)));
+
+        }
+
     }
-}
+

@@ -1,5 +1,6 @@
 package dk.dtu.philipsclockradio;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -9,6 +10,8 @@ public class ContextClockradio {
     private Date mTime;
     private String mDisplayText;
     public boolean isClockRunning = false;
+    public ArrayList <Integer> presetFm = new ArrayList<>();
+    public ArrayList <Integer> presetAM = new ArrayList<>();
 
     public static MainUI ui;
 
