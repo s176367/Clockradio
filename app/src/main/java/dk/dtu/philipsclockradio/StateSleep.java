@@ -1,9 +1,11 @@
 package dk.dtu.philipsclockradio;
 
 import android.net.wifi.p2p.WifiP2pManager;
+import android.os.CountDownTimer;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -14,6 +16,12 @@ public class StateSleep extends StateAdapter {
     private ContextClockradio context;
     ArrayList<Integer> sleeplist = new ArrayList<Integer>();
     int i = 0;
+    private static final long START_TIME_IN_MILLIS = 5000;
+
+    private CountDownTimer mCountdowntimer;
+    private boolean mTimerRunning;
+    private long mtTimeLeftInMillis = START_TIME_IN_MILLIS;
+
 
 
     @Override
@@ -32,6 +40,7 @@ public class StateSleep extends StateAdapter {
         context.ui.setDisplayText(String.valueOf(sleeplist.get(i)));
 
     }
+
     @Override
     public void onClick_Snooze(ContextClockradio context) {
         super.onClick_Snooze(context);
@@ -49,12 +58,34 @@ public class StateSleep extends StateAdapter {
         super.onLongClick_Power(context);
         context.setState(new StateOnAM());
     }
+    private void startTimer(){
+        mCountdowntimer = new CountDownTimer(mtTimeLeftInMillis, 500) {
+            @Override
+            public void onTick(long l) {
+                mtTimeLeftInMillis = l;
+
+            }
+
+            @Override
+            public void onFinish() {
+            mTimerRunning = false;
+            context.setState(new StateStandby(context.getTime()));
+
+            }
+        }.start();
+        mTimerRunning = true;
+    }
+
+    private void resetTimer(){
+        mtTimeLeftInMillis = START_TIME_IN_MILLIS;
+    }
 
     @Override
     public void onClick_Sleep(final ContextClockradio context) {
-        if(sleeplist.size()>0)
-
-        {
+        //Burde reset timer ved hvert on click. Men Crasher pga. nullpointer
+        resetTimer();
+        startTimer();
+        if(sleeplist.size()>0) {
             i++;
             if (i > sleeplist.size() - 1) {
                 i = 0;
@@ -65,8 +96,5 @@ public class StateSleep extends StateAdapter {
         }
 
 
-    }
-
-    private class ActionEvent {
     }
 }
