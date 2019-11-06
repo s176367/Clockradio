@@ -273,4 +273,10 @@ public class MainUI extends AppCompatActivity implements OnTouchListener {
     public void displayToastFM(Context view) {
         Toast.makeText(MainUI.this, "Now in FM mode", Toast.LENGTH_SHORT).show();
     }
+    public void displayToastFilledFM(Context view){
+        Toast.makeText(MainUI.this, "Too many presets, Press Hour to delete all preset", Toast.LENGTH_SHORT).show();
+    }
+    public void fmToastClear(Context view){
+        Toast.makeText(MainUI.this, "Presets have been cleared", Toast.LENGTH_SHORT).show();
+    }
 }

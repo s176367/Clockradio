@@ -61,6 +61,7 @@ public class StateOnFM extends StateAdapter {
 
 
 
+
         context.ui.displayToastFM(view);
 
     }

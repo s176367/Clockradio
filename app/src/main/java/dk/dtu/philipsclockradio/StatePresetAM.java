@@ -1,10 +1,13 @@
 package dk.dtu.philipsclockradio;
 
+import android.content.Context;
+
 public class StatePresetAM extends StateAdapter {
 
     StateOnAM stateOnAM = new StateOnAM();
     int i = 0;
     int presetAMi = 0;
+    Context view;
 
 
 
@@ -23,17 +26,26 @@ public class StatePresetAM extends StateAdapter {
     @Override
     public void onExitState(ContextClockradio context) {
         context.ui.turnOffTextBlink();
+        context.ui.turnOffLED(i+1);
     }
 
     @Override
     public void onClick_Preset(ContextClockradio context) {
-        if (context.presetFm.length<3){
-            context.presetFm[presetAMi] = stateOnAM.list.get(i);
+        if (context.presetAM.size() < 4) {
+            context.presetAM.add(stateOnAM.list.get(i));
             presetAMi++;
+            context.setState(new StateOnAM());
+        } else {
+            context.ui.displayToastFilledFM(view);
+            context.setState(new StateOnAM());
         }
-        context.setState(new StateOnAM() );
-
     }
+        @Override
+        public void onClick_Hour(ContextClockradio context) {
+            context.presetAM.clear();
+            context.ui.fmToastClear(view);
+        }
+
     @Override
     public void onLongClick_Preset(ContextClockradio context) {
         i++;

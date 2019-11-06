@@ -11,9 +11,10 @@ public class ContextClockradio {
     private String mDisplayText;
     public boolean isClockRunning = false;
 
-    public int[] presetFm = new int[3];
-    //public ArrayList <Integer> presetFm = new ArrayList<>();
-    //public ArrayList <Integer> presetAM = new ArrayList<>();
+    //public int[] presetFm = new int[4];
+    //public int[] presetAM= new int[4];
+    public ArrayList <Integer> presetFm = new ArrayList<Integer>();
+    public ArrayList <Integer> presetAM = new ArrayList<>();
 
 
 
