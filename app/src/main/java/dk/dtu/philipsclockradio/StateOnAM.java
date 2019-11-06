@@ -97,4 +97,21 @@ public class StateOnAM extends StateAdapter {
     public void onLongClick_Preset(ContextClockradio context) {
         context.setState(new StatePresetAM());
     }
+    public void onClick_Preset(ContextClockradio context) {
+        if (context.presetAM.size()>0) {
+            i++;
+            if (i > context.presetAM.size()-1) {
+                i = 0;
+
+            }
+                 context.ui.setDisplayText("CH-" + context.presetAM.get(i));
+
+
+        }else{
+            context.ui.noPresets(view);
+
+        }
+
+    }
+
 }

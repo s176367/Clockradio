@@ -47,7 +47,6 @@ public class StateStandby extends StateAdapter {
         if(!context.isClockRunning){
             startClock();
         }
-        context.ui.turnOnLED(3);
     }
 
     @Override

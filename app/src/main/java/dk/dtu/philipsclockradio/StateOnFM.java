@@ -56,12 +56,6 @@ public class StateOnFM extends StateAdapter {
         context.ui.setDisplayText(String.valueOf(list.get(i)));
         context.ui.turnOnLED(1);
 
-
-
-
-
-
-
         context.ui.displayToastFM(view);
 
     }
@@ -127,6 +121,19 @@ public class StateOnFM extends StateAdapter {
 
     @Override
     public void onClick_Preset(ContextClockradio context) {
+        if (context.presetFm.size()>0) {
+            i++;
+            if (i > context.presetFm.size()-1) {
+                i = 0;
+
+            }
+                context.ui.setDisplayText("CH-" + context.presetFm.get(i));
+
+
+        }else{
+            context.ui.noPresets(view);
+
+        }
 
     }
 }

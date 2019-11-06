@@ -279,4 +279,8 @@ public class MainUI extends AppCompatActivity implements OnTouchListener {
     public void fmToastClear(Context view){
         Toast.makeText(MainUI.this, "Presets have been cleared", Toast.LENGTH_SHORT).show();
     }
+    public void noPresets(Context view){
+        Toast.makeText(MainUI.this, "No presets saved. Hold Preset to set presets", Toast.LENGTH_SHORT).show();
+    }
+
 }
