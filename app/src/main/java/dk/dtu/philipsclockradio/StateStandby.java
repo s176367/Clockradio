@@ -46,6 +46,8 @@ public class StateStandby extends StateAdapter {
         if(!context.isClockRunning){
             startClock();
         }
+        context.getTime();
+        context.updateDisplayTime();
     }
 
     @Override
@@ -77,4 +79,17 @@ public class StateStandby extends StateAdapter {
         super.onLongClick_Power(context);
         context.setState(new StateOnAM());
     }
+
+    @Override
+    public void onLongClick_AL1(ContextClockradio context) {
+        super.onLongClick_AL1(context);
+        context.setState(new StateAlarm());
+    }
+
+    @Override
+    public void onLongClick_AL2(ContextClockradio context) {
+        super.onLongClick_AL2(context);
+        context.setState(new StateAlarm());
+    }
+
 }

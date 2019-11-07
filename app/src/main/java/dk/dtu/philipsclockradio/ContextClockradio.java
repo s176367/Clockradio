@@ -15,6 +15,7 @@ public class ContextClockradio {
     //public int[] presetAM= new int[4];
     public ArrayList <Integer> presetFm = new ArrayList<Integer>();
     public ArrayList <Integer> presetAM = new ArrayList<>();
+    public ArrayList<Long> alarmlist = new ArrayList<Long>();
 
 
 

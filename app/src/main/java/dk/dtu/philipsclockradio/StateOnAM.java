@@ -43,8 +43,7 @@ public class StateOnAM extends StateAdapter {
         list.add(3, 40);
         list.add(4,50);
         context.updateDisplayTime();
-        context.ui.setDisplayText(String.valueOf(list.get(i)));
-        context.ui.turnOnLED(2);
+        context.ui.setDisplayText("AM-"+String.valueOf(list.get(i)));
         context.ui.displayToastAM(view);
 
     }
@@ -79,7 +78,7 @@ public class StateOnAM extends StateAdapter {
         if(i>list.size()-1){
             i=0;
         }
-        context.ui.setDisplayText(String.valueOf(list.get(i)));
+        context.ui.setDisplayText("AM-"+String.valueOf(list.get(i)));
         System.out.println(list.get(i));
     }
 
@@ -89,7 +88,7 @@ public class StateOnAM extends StateAdapter {
         if (i<0){
             i = list.size()-1;
         }
-        context.ui.setDisplayText(String.valueOf(list.get(i)));
+        context.ui.setDisplayText("AM-"+String.valueOf(list.get(i)));
 
     }
 

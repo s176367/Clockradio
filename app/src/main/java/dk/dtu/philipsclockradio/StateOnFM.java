@@ -53,9 +53,7 @@ public class StateOnFM extends StateAdapter {
         list.add(3, 40);
         list.add(4,50);
         context.updateDisplayTime();
-        context.ui.setDisplayText(String.valueOf(list.get(i)));
-        context.ui.turnOnLED(1);
-
+        context.ui.setDisplayText("FM-"+String.valueOf(list.get(i)));
         context.ui.displayToastFM(view);
 
     }
@@ -99,8 +97,7 @@ public class StateOnFM extends StateAdapter {
             if(i>list.size()-1){
                 i=0;
             }
-            context.ui.setDisplayText(String.valueOf(list.get(i)));
-        System.out.println(list.get(i));
+            context.ui.setDisplayText("FM-"+String.valueOf(list.get(i)));
     }
 
     @Override
@@ -109,7 +106,7 @@ public class StateOnFM extends StateAdapter {
             if (i<0){
                 i = list.size()-1;
             }
-            context.ui.setDisplayText(String.valueOf(list.get(i)));
+            context.ui.setDisplayText("FM-"+String.valueOf(list.get(i)));
 
         }
 
