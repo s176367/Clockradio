@@ -42,7 +42,6 @@ public class StateStandby extends StateAdapter {
     public void onEnterState(ContextClockradio context) {
         //Lokal context oprettet for at Runnable kan få adgang
         mContext = context;
-
         context.updateDisplayTime();
         if(!context.isClockRunning){
             startClock();
@@ -52,7 +51,6 @@ public class StateStandby extends StateAdapter {
     @Override
     public void onExitState(ContextClockradio context) {
         super.onExitState(context);
-        context.ui.turnOffLED(3);
     }
 
     @Override

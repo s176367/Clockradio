@@ -1,20 +1,13 @@
 package dk.dtu.philipsclockradio;
 
-import android.net.wifi.p2p.WifiP2pManager;
 import android.os.CountDownTimer;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class StateSleep extends StateAdapter {
 
     private ContextClockradio context;
-    ArrayList<Integer> sleeplist = new ArrayList<Integer>();
+    ArrayList<String> sleeplist = new ArrayList<String>();
     int i = 0;
     private static final long START_TIME_IN_MILLIS = 5000;
 
@@ -27,17 +20,33 @@ public class StateSleep extends StateAdapter {
     @Override
     public void onEnterState(ContextClockradio context) {
         super.onEnterState(context);
+        this.context = context;
+        resetTimer();
+        startTimer();
         context.ui.turnOffLED(1);
         context.ui.turnOffLED(2);
         context.ui.turnOffLED(3);
         context.ui.turnOffLED(4);
         context.ui.turnOffLED(5);
-        sleeplist.add(0,120);
-        sleeplist.add(1,90);
-        sleeplist.add(2,60);
-        sleeplist.add(3,30);
-        sleeplist.add(4,15);
+        sleeplist.add(0,"120");
+        sleeplist.add(1,"90");
+        sleeplist.add(2,"60");
+        sleeplist.add(3,"30");
+        sleeplist.add(4,"15");
+        sleeplist.add(5, "Off");
         context.ui.setDisplayText(String.valueOf(sleeplist.get(i)));
+
+    }
+
+    @Override
+    public void onExitState(ContextClockradio context) {
+        super.onExitState(context);
+        if (i == 5){
+            context.ui.turnOffLED(3);
+
+        }else{
+            context.ui.turnOnLED(3);
+        }
 
     }
 
