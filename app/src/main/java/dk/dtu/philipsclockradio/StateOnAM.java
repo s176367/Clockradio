@@ -113,4 +113,9 @@ public class StateOnAM extends StateAdapter {
 
     }
 
+    @Override
+    public void onLongClick_Snooze(ContextClockradio context) {
+        super.onLongClick_Snooze(context);
+        context.setState(new StateStandby(context.getTime()));
+    }
 }

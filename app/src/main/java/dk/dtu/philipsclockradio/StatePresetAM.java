@@ -51,11 +51,7 @@ public class StatePresetAM extends StateAdapter {
         i++;
         if(i>stateOnAM.list.size()-1){
             i=0;
-            context.ui.turnOffLED(1);
-            context.ui.turnOffLED(2);
-            context.ui.turnOffLED(3);
-            context.ui.turnOffLED(4);
-            context.ui.turnOffLED(5);
+
         }
         context.ui.setDisplayText(String.valueOf(stateOnAM.list.get(i)));
         context.ui.turnOnLED(i+1);

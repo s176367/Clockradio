@@ -91,7 +91,6 @@ public class StateSleep extends StateAdapter {
 
     @Override
     public void onClick_Sleep(final ContextClockradio context) {
-        //Burde reset timer ved hvert on click. Men Crasher pga. nullpointer
         resetTimer();
         startTimer();
         if(sleeplist.size()>0) {

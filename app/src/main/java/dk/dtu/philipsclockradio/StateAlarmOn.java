@@ -10,12 +10,14 @@ private ContextClockradio context;
         this.context = context;
         context.ui.setDisplayText("ALARM");
         context.ui.turnOnTextBlink();
+        context.ui.turnOnLED(2);
 
     }
 
     @Override
     public void onClick_Snooze(final ContextClockradio context) {
         context.ui.turnOffTextBlink();
+        context.ui.turnOnLED(4);
         context.setState(new StateStandby(context.getTime()));
 
         class Asynctask2 extends AsyncTask{
@@ -37,6 +39,24 @@ private ContextClockradio context;
     public void onClick_AL1(ContextClockradio context) {
         context.setState(new StateStandby(context.getTime()));
         context.ui.turnOffTextBlink();
+        context.ui.turnOffLED(2);
+        context.ui.turnOffLED(4);
 
+    }
+
+    @Override
+    public void onClick_AL2(ContextClockradio context) {
+        context.setState(new StateStandby(context.getTime()));
+        context.ui.turnOffTextBlink();
+        context.ui.turnOffLED(2);
+        context.ui.turnOffLED(4);
+    }
+
+    @Override
+    public void onClick_Power(ContextClockradio context) {
+        context.setState(new StateOnFM());
+        context.ui.turnOffTextBlink();
+        context.ui.turnOffLED(2);
+        context.ui.turnOffLED(4);
     }
 }

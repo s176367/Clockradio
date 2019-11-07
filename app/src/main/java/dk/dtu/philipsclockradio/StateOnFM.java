@@ -65,13 +65,10 @@ public class StateOnFM extends StateAdapter {
     }
 
     @Override
-    public void onClick_Snooze(ContextClockradio context) {
-        super.onClick_Snooze(context);
-        context.ui.turnOffLED(1);
+    public void onLongClick_Snooze(ContextClockradio context) {
+        super.onLongClick_Snooze(context);
         context.setState(new StateStandby(context.getTime()));
-
     }
-
 
     @Override
     public void onClick_Sleep(ContextClockradio context) {

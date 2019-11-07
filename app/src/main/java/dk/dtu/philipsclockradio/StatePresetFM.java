@@ -21,7 +21,6 @@ public class StatePresetFM extends StateAdapter{
         statefm.list.add(4,50);
         context.ui.setDisplayText(String.valueOf(statefm.list.get(i)));
         context.ui.turnOnTextBlink();
-        context.ui.turnOnLED(1);
     }
 
     @Override
@@ -54,15 +53,9 @@ public class StatePresetFM extends StateAdapter{
         i++;
         if(i>statefm.list.size()-1){
             i=0;
-            context.ui.turnOffLED(1);
-            context.ui.turnOffLED(2);
-            context.ui.turnOffLED(3);
-            context.ui.turnOffLED(4);
-            context.ui.turnOffLED(5);
+
         }
         context.ui.setDisplayText(String.valueOf(statefm.list.get(i)));
-        context.ui.turnOnLED(i+1);
-        context.ui.turnOffLED(i);
 
 
     }

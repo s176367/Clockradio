@@ -22,7 +22,6 @@ public class StateAlarm extends StateAdapter {
         mTimeAlarm = context.getTime();
         context.updateDisplayTime();
         context.ui.turnOnTextBlink();
-
         Calendar timeAlarm = Calendar.getInstance();
         timeAlarm.set(2019,01,01,12,01 );
         alarmTime = timeAlarm.getTime();
@@ -50,13 +49,7 @@ public class StateAlarm extends StateAdapter {
     public void onExitState(ContextClockradio context) {
         super.onExitState(context);
         this.context = context;
-        context.ui.turnOnLED(3);
         context.ui.turnOffTextBlink();
-    }
-    public void setAlarm() {
-        i++;
-        context.alarmlist.add(i-1, alarmTime.getTime());
-
     }
     @Override
     public void onClick_Power(ContextClockradio context) {
@@ -66,7 +59,11 @@ public class StateAlarm extends StateAdapter {
     @Override
     public void onClick_AL1(final ContextClockradio context) {
         super.onLongClick_AL1(context);
+        context.ui.turnOnLED(2);
+        context.ui.turnOffTextBlink();
+        context.updateDisplayTime();
         class Asynctask1 extends AsyncTask{
+
 
             @Override
             protected Object doInBackground(Object[] objects) {
@@ -101,9 +98,37 @@ public class StateAlarm extends StateAdapter {
     }
 
     @Override
-    public void onClick_AL2(ContextClockradio context) {
-        super.onClick_AL2(context);
-        context.setState(new StateStandby(context.getTime()));
+    public void onClick_AL2(final ContextClockradio context) {
+        context.ui.turnOnLED(2);
+
+        class Asynctask1 extends AsyncTask{
+
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                boolean run = true;
+                while (run) {
+
+                    String currentTime = context.getTime().toString().substring(11, 16);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (time.equals(currentTime)) {
+                        run = false;
+                    }
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                context.setState(new StateAlarmOn());
+            }
+
+        }
+        new Asynctask1().execute();
     }
-}
+    }
 
