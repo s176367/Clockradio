@@ -24,10 +24,9 @@ public class StateAlarm extends StateAdapter {
         context.ui.turnOnTextBlink();
 
         Calendar timeAlarm = Calendar.getInstance();
-        timeAlarm.set(2019,01,01,12,00 );
+        timeAlarm.set(2019,01,01,12,01 );
         alarmTime = timeAlarm.getTime();
         time = alarmTime.toString().substring(11,16);
-        System.out.println(time);
     }
 
     @Override
@@ -36,14 +35,15 @@ public class StateAlarm extends StateAdapter {
         this.context = context;
         alarmTime.setTime(alarmTime.getTime() + 3600000);
         updateDisplay(alarmTime);
+        time = alarmTime.toString().substring(11,16);
     }
 
     @Override
     public void onClick_Min(ContextClockradio context) {
-        super.onClick_Min(context);
         this.context = context;
         alarmTime.setTime(alarmTime.getTime() + 60000);
         updateDisplay(alarmTime);
+        time = alarmTime.toString().substring(11,16);
     }
 
     @Override
@@ -70,30 +70,30 @@ public class StateAlarm extends StateAdapter {
 
             @Override
             protected Object doInBackground(Object[] objects) {
-                String currentTime = context.getTime().toString().substring(11, 16);
-                while (getStatus()== Status.RUNNING) {
+                boolean run = true;
+                while (run) {
+
+                    String currentTime = context.getTime().toString().substring(11, 16);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    if (time.equals(currentTime)) {
+                        run = false;
+                    }
                 }
-                if (time.equals(currentTime)) {
-                    
-                }
+
                 return null;
             }
 
             @Override
             protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                context.ui.setDisplayText("ALARM");
-
+                context.setState(new StateAlarmOn());
             }
 
         }
         new Asynctask1().execute();
-        context.setState(new StateStandby(context.getTime()));
     }
     public void updateDisplay(Date date){
         display = alarmTime.toString().substring(11,16);
